@@ -51,7 +51,7 @@ class RNN(object):
         self.decoder_optimizer.step()
         self.encoder_optimizer.step()
 
-        return total_loss.item(), outputs
+        return total_loss.data[0], outputs   # use total_loss.data[0] for version 0.3.0_4 and below, .item() for 0.4.0
 
     def eval(self, input):
         hidden_state = self.encoder.first_hidden()
