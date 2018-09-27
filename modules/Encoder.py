@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
+
 class Encoder(nn.Module):
     def __init__(self, input_size, embedding_size=500, hidden_size=1000):
         super(Encoder, self).__init__()

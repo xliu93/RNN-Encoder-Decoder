@@ -1,18 +1,15 @@
-import zipfile
 import torch
 
-def read_data(filename):
-    z = zipfile.ZipFile(filename, 'r')
 
+def read_data(filename):
     lines = []
-    with z.open(z.namelist()[0]) as f:
+    with open(filename, 'r') as fp:
         i = 0
-        for line in f:
+        for line in fp:
             if i % 100 == 0:
-                line = line.decode('utf-8').lower().replace("'", " ").replace(".", "").replace("?", "")\
+                line = line.lower().replace("'", " ").replace(".", "").replace("?", "")\
                     .replace("!", "").replace(":", "").replace(";", "")
                 lines.append(line)
             i += 1
-
-    z.close()
+    fp.close()
     return lines

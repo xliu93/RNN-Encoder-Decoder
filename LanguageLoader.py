@@ -5,6 +5,7 @@ import pickle
 
 from utils import read_data
 
+
 class LanguageLoader(object):
     def __init__(self, input_path, output_path, vocab_size, max_length):
         super(LanguageLoader, self).__init__()
@@ -20,7 +21,7 @@ class LanguageLoader(object):
             self.output_vecs = pickle.load(open("data/output_vecs.p", "rb"))
             self.output_size = len(self.output_dict)
             print("Languages found and loaded.")
-        except(IOError):
+        except IOError:
             self.input_dict, self.input_vecs, self.input_size = self.init_language(input_path)
             pickle.dump(self.input_dict, open("data/input_dict.p", "wb"))
             pickle.dump(self.input_vecs, open("data/input_vecs.p", "wb"))
@@ -45,9 +46,9 @@ class LanguageLoader(object):
         return dictionary, vectors, len(dictionary)
 
     def sentences(self, amount):
-        indeces = np.random.choice(len(self.input_vecs), amount)
-        indeces = range(len(self.input_vecs))
-        sentences = [(self.input_vecs[i], self.output_vecs[i]) for i in indeces]
+        indices = np.random.choice(len(self.input_vecs), amount)
+        # indices = range(len(self.input_vecs))
+        sentences = [(self.input_vecs[i], self.output_vecs[i]) for i in indices]
 
         return sentences
 

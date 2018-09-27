@@ -8,6 +8,7 @@ import torch
 
 import numpy as np
 
+
 class RNN(object):
     def __init__(self, input_size, output_size):
         super(RNN, self).__init__()
@@ -23,7 +24,6 @@ class RNN(object):
         sos[0, 0], eos[0, 0] = 0, 1
 
         self.sos, self.eos = sos, eos
-
 
     def train(self, input, target):
         target.insert(0, self.sos)
@@ -51,7 +51,7 @@ class RNN(object):
         self.decoder_optimizer.step()
         self.encoder_optimizer.step()
 
-        return total_loss.data[0], outputs
+        return total_loss.item(), outputs
 
     def eval(self, input):
         hidden_state = self.encoder.first_hidden()

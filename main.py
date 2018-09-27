@@ -1,13 +1,14 @@
 from LanguageLoader import *
 from RNN import *
 
-en_path = 'data/en.zip'
-fr_path = 'data/fr.zip'
+en_path = 'data/europarl-v7.fr-en.en'
+fr_path = 'data/europarl-v7.fr-en.fr'
 
 max_length = 20
 num_epochs = 1000
 num_batches = 7500
 vocab_size = 15000
+
 
 def main():
     data = LanguageLoader(en_path, fr_path, vocab_size, max_length)
@@ -28,6 +29,7 @@ def main():
                 print("Guess: \"%s\"\n" % data.vec_to_sentence(outputs[:-1]))
                 rnn.save()
 
+
 def translate():
     data = LanguageLoader(en_path, fr_path, vocab_size, max_length)
     rnn = RNN(data.input_size, data.output_size)
@@ -36,6 +38,7 @@ def translate():
 
     translation = rnn.eval(vecs)
     print(data.vec_to_sentence(translation))
+
 
 main()
 #translate()
